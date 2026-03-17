@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RAWMAT - Pakistan's largest B2B marketplace for industrial raw materials. Source Polymers, Metals, Chemicals with verified suppliers.">
+  <title>RAWMAT - Industrial Raw Materials Marketplace Pakistan</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #131318;
+      --bg-elevated: #18181d;
+      --bg-overlay: #0e0e13;
+      --foreground: #fafafa;
+      --muted: #71717a;
+      --border: #27272a;
+      --primary: #f97316;
+      --primary-hover: #ea6a0e;
+      --secondary: #27272a;
+      --font-sans: system-ui, -apple-system, sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --max-w: 1200px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: sticky; top: 0; z-index: 50;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,15,0.7);
+      backdrop-filter: blur(20px);
+    }
+    .navbar-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-size: 20px; font-weight: 900; letter-spacing: -0.05em; }
+    .logo span { color: var(--primary); }
+    .nav-links { display: flex; gap: 24px; margin-left: 32px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--foreground); }
+    .search-box {
+      flex: 1; max-width: 420px; margin: 0 48px; position: relative;
+    }
+    .search-box input {
+      width: 100%; background: var(--secondary); border: 1px solid var(--border);
+      padding: 8px 60px 8px 40px; font-size: 13px; border-radius: 6px;
+      color: var(--foreground); outline: none; transition: box-shadow 0.2s;
+    }
+    .search-box input::placeholder { color: var(--muted); }
+    .search-box input:focus { box-shadow: 0 0 0 1px rgba(249,115,22,0.5); }
+    .search-box svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+    .search-box kbd {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 10px; background: var(--bg-elevated); padding: 2px 6px;
+      border-radius: 4px; color: var(--muted); font-family: var(--font-mono);
+    }
+    .btn-primary {
+      background: var(--primary); color: #fff; border: none; padding: 10px 20px;
+      font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary {
+      background: var(--secondary); color: var(--foreground); border: 1px solid var(--border);
+      padding: 10px 20px; font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: #333; }
+
+    /* ===== HERO ===== */
+    .hero {
+      border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 64px 24px; position: relative;
+    }
+    .hero-tag {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 24px;
+    }
+    .hero-tag .line { width: 32px; height: 1px; background: var(--primary); }
+    .hero-tag span {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em;
+      color: var(--primary); font-family: var(--font-mono); font-weight: 600;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px); font-weight: 700;
+      line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; max-width: 720px;
+    }
+    .hero h1 span { color: var(--primary); }
+    .hero p {
+      font-size: clamp(15px, 2vw, 18px); color: var(--muted);
+      max-width: 540px; margin-bottom: 32px; line-height: 1.6;
+    }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 48px; }
+    .hero-buttons .btn-primary { display: inline-flex; align-items: center; gap: 8px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 600px; }
+    .stat {
+      display: flex; align-items: center; gap: 12px;
+      border: 1px solid var(--border); padding: 12px;
+    }
+    .stat svg { color: var(--primary); flex-shrink: 0; }
+    .stat-value { font-size: 14px; font-weight: 700; font-family: var(--font-mono); }
+    .stat-label { font-size: 11px; color: var(--muted); }
+
+    /* ===== CATEGORIES ===== */
+    .categories { border-bottom: 1px solid var(--border); }
+    .categories-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 32px 24px;
+    }
+    .categories-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
+    }
+    .categories-header h2 {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--muted);
+    }
+    .categories-header a {
+      font-size: 12px; color: var(--primary); font-family: var(--font-mono);
+    }
+    .categories-header a:hover { text-decoration: underline; }
+    .categories-grid {
+      display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px;
+    }
+    .cat-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      border: 1px solid var(--border); padding: 16px 8px;
+      background: var(--bg-elevated); cursor: pointer; transition: border-color 0.3s;
+    }
+    .cat-btn:hover { border-color: rgba(249,115,22,0.5); }
+    .cat-btn svg { color: var(--muted); transition: color 0.3s; }
+    .cat-btn:hover svg { color: var(--primary); }
+    .cat-btn .cat-label { font-size: 11px; font-weight: 600; }
+    .cat-btn .cat-count { font-size: 10px; font-family: var(--font-mono); color: var(--muted); }
+
+    /* ===== MATERIALS GRID ===== */
+    .materials { max-width: var(--max-w); margin: 0 auto; padding: 40px 24px; }
+    .materials-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
+    }
+    .materials-header h2 { font-size: 18px; font-weight: 700; }
+    .materials-header .subtitle { font-size: 12px; color: var(--muted); font-family: var(--font-mono); margin-top: 4px; }
+    .materials-header select {
+      background: var(--secondary); border: 1px solid var(--border);
+      color: var(--foreground); font-size: 13px; padding: 6px 12px;
+      border-radius: 6px; font-family: var(--font-mono); outline: none;
+    }
+    .materials-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    }
+
+    /* ===== MATERIAL CARD ===== */
+    .material-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 16px; transition: border-color 0.3s;
+    }
+    .material-card:hover { border-color: rgba(249,115,22,0.5); }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+    .card-id { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-family: var(--font-mono); }
+    .card-badge {
+      font-size: 10px; font-weight: 700; font-family: var(--font-mono);
+      padding: 2px 8px; border-radius: 999px; background: var(--secondary);
+    }
+    .card-badge.in-stock { color: var(--primary); }
+    .card-badge.pre-order { color: var(--muted); }
+    .card-name {
+      font-size: 17px; font-weight: 600; margin-bottom: 4px; line-height: 1.3;
+      transition: color 0.3s;
+    }
+    .material-card:hover .card-name { color: var(--primary); }
+    .card-meta { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+    .card-specs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      border-top: 1px solid var(--border); padding-top: 16px; margin-bottom: 24px;
+    }
+    .spec-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .spec-value { font-size: 13px; font-family: var(--font-mono); }
+    .btn-quote {
+      width: 100%; padding: 10px; background: var(--foreground); color: var(--bg);
+      border: none; font-size: 13px; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-quote:hover { background: var(--primary); color: #fff; }
+
+    /* ===== PAGINATION ===== */
+    .pagination {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border);
+    }
+    .pagination-info { font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
+    .pagination-buttons { display: flex; gap: 4px; }
+    .page-btn {
+      padding: 6px 12px; font-size: 12px; font-family: var(--font-mono);
+      border: 1px solid var(--border); background: transparent; color: var(--muted);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .page-btn:hover { color: var(--foreground); }
+    .page-btn.active { border-color: var(--primary); background: var(--primary); color: #fff; }
+    .page-btn.arrow { padding: 6px 8px; }
+
+    /* ===== FOOTER ===== */
+    .footer { border-top: 1px solid var(--border); margin-top: 48px; }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; padding: 40px 24px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+    .footer-brand p { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
+    .footer-col h4 {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--muted); margin-bottom: 12px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { font-size: 13px; color: var(--muted); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--foreground); }
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: 11px; color: var(--muted); font-family: var(--font-mono); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .categories-grid { grid-template-columns: repeat(4, 1fr); }
+      .materials-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .search-box { display: none; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .categories-grid { grid-template-columns: repeat(2, 1fr); }
+      .materials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-bottom { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div style="display:flex;align-items:center;">
+        <div class="logo">RAW<span>MAT</span></div>
+        <div class="nav-links">
+          <a href="#">Browse Materials</a>
+          <a href="#">Suppliers</a>
+          <a href="#">Logistics</a>
+        </div>
+      </div>
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" placeholder="Search by Grade, CAS No, or Material...">
+        <kbd>CMD+K</kbd>
+      </div>
+      <button class="btn-primary">POST REQUIREMENT</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-tag">
+        <div class="line"></div>
+        <span>Pakistan's #1 B2B Material Marketplace</span>
+      </div>
+      <h1>Source Industrial Grade Materials with <span>Technical Precision</span></h1>
+      <p>Pakistan's largest marketplace for Polymers, Metals, and Chemicals. Verified suppliers. Real-time pricing.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary">BROWSE MATERIALS →</button>
+        <button class="btn-secondary">POST REQUIREMENT</button>
+      </div>
+      <div class="stats-grid">
+        <div class="stat">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div><div class="stat-value">2,400+</div><div class="stat-label">Verified Suppliers</div></div>
+        </div>
+        <div class="stat">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <div><div class="stat-value">18,000+</div><div class="stat-label">Materials Listed</div></div>
+        </div>
+        <div class="stat">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <div><div class="stat-value">45+</div><div class="stat-label">Cities Covered</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories">
+    <div class="categories-inner">
+      <div class="categories-header">
+        <h2>Browse by Category</h2>
+        <a href="#">View All →</a>
+      </div>
+      <div class="categories-grid">
+        <button class="cat-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          <span class="cat-label">Polymers</span><span class="cat-count">4,200</span>
+        </button>
+        <button class="cat-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          <span class="cat-label">Metals & Alloys</span><span class="cat-count">3,800</span>
+        </button>
+        <button class="cat-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          <span class="cat-label">Chemicals</span><span class="cat-count">2,900</span>
+        </button>
+        <button class="cat-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
+          <span class="cat-label">Electronics</span><span class="cat-count">1,600</span>
+        </button>
+        <button class="cat-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          <span class="cat-label">Hardware</span><span class="cat-count">2,100</span>
+        </button>
+        <button class="cat-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          <span class="cat-label">Petroleum</span><span class="cat-count">980</span>
+        </button>
+        <button class="cat-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          <span class="cat-label">Textiles</span><span class="cat-count">1,400</span>
+        </button>
+        <button class="cat-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span class="cat-label">Electrical</span><span class="cat-count">1,100</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIALS -->
+  <section class="materials">
+    <div class="materials-header">
+      <div>
+        <h2>Latest Materials</h2>
+        <p class="subtitle">Total Results: 1,240</p>
+      </div>
+      <select>
+        <option>Sort: Newest</option>
+        <option>Price: Low → High</option>
+        <option>Price: High → Low</option>
+      </select>
+    </div>
+
+    <div class="materials-grid">
+
+      <div class="material-card">
+        <div class="card-top">
+          <span class="card-id">ID: RM-8829</span>
+          <span class="card-badge in-stock">IN STOCK</span>
+        </div>
+        <div class="card-name">Polypropylene Granules (PP)</div>
+        <div class="card-meta">Grade: Injection Molding | Origin: Saudi Arabia</div>
+        <div class="card-specs">
+          <div><div class="spec-label">Min Order</div><div class="spec-value">500 KG</div></div>
+          <div><div class="spec-label">Price/KG</div><div class="spec-value">Rs. 285.00</div></div>
+        </div>
+        <button class="btn-quote">REQUEST QUOTE →</button>
+      </div>
+
+      <div class="material-card">
+        <div class="card-top">
+          <span class="card-id">ID: RM-4401</span>
+          <span class="card-badge in-stock">IN STOCK</span>
+        </div>
+        <div class="card-name">Hot Rolled Steel Coil (HRC)</div>
+        <div class="card-meta">Grade: SS400 / Q235B | Origin: China</div>
+        <div class="card-specs">
+          <div><div class="spec-label">Min Order</div><div class="spec-value">5 MT</div></div>
+          <div><div class="spec-label">Price/KG</div><div class="spec-value">Rs. 195.00</div></div>
+        </div>
+        <button class="btn-quote">REQUEST QUOTE →</button>
+      </div>
+
+      <div class="material-card">
+        <div class="card-top">
+          <span class="card-id">ID: RM-6612</span>
+          <span class="card-badge in-stock">IN STOCK</span>
+        </div>
+        <div class="card-name">Caustic Soda Flakes (NaOH)</div>
+        <div class="card-meta">Grade: Industrial 99% | Origin: Iran</div>
+        <div class="card-specs">
+          <div><div class="spec-label">Min Order</div><div class="spec-value">1 MT</div></div>
+          <div><div class="spec-label">Price/KG</div><div class="spec-value">Rs. 120.00</div></div>
+        </div>
+        <button class="btn-quote">REQUEST QUOTE →</button>
+      </div>
+
+      <div class="material-card">
+        <div class="card-top">
+          <span class="card-id">ID: RM-7789</span>
+          <span class="card-badge pre-order">PRE-ORDER</span>
+        </div>
+        <div class="card-name">HDPE Blow Molding Resin</div>
+        <div class="card-meta">Grade: HMA 018 | Origin: UAE</div>
+        <div class="card-specs">
+          <div><div class="spec-label">Min Order</div><div class="spec-value">2 MT</div></div>
+          <div><div class="spec-label">Price/KG</div><div class="spec-value">Rs. 310.00</div></div>
+        </div>
+        <button class="btn-quote">REQUEST QUOTE →</button>
+      </div>
+
+      <div class="material-card">
+        <div class="card-top">
+          <span class="card-id">ID: RM-3345</span>
+          <span class="card-badge in-stock">IN STOCK</span>
+        </div>
+        <div class="card-name">Copper Cathode 99.99%</div>
+        <div class="card-meta">Grade: LME Grade A | Origin: Chile</div>
+        <div class="card-specs">
+          <div><div class="spec-label">Min Order</div><div class="spec-value">1 MT</div></div>
+          <div><div class="spec-label">Price/KG</div><div class="spec-value">Rs. 1,850.00</div></div>
+        </div>
+        <button class="btn-quote">REQUEST QUOTE →</button>
+      </div>
+
+      <div class="material-card">
+        <div class="card-top">
+          <span class="card-id">ID: RM-5567</span>
+          <span class="card-badge in-stock">IN STOCK</span>
+        </div>
+        <div class="card-name">PET Resin (Bottle Grade)</div>
+        <div class="card-meta">Grade: IV 0.80 ± 0.02 | Origin: Pakistan</div>
+        <div class="card-specs">
+          <div><div class="spec-label">Min Order</div><div class="spec-value">3 MT</div></div>
+          <div><div class="spec-label">Price/KG</div><div class="spec-value">Rs. 245.00</div></div>
+        </div>
+        <button class="btn-quote">REQUEST QUOTE →</button>
+      </div>
+
+      <div class="material-card">
+        <div class="card-top">
+          <span class="card-id">ID: RM-9910</span>
+          <span class="card-badge in-stock">IN STOCK</span>
+        </div>
+        <div class="card-name">Zinc Ingots 99.995%</div>
+        <div class="card-meta">Grade: SHG Grade | Origin: Australia</div>
+        <div class="card-specs">
+          <div><div class="spec-label">Min Order</div><div class="spec-value">2 MT</div></div>
+          <div><div class="spec-label">Price/KG</div><div class="spec-value">Rs. 650.00</div></div>
+        </div>
+        <button class="btn-quote">REQUEST QUOTE →</button>
+      </div>
+
+      <div class="material-card">
+        <div class="card-top">
+          <span class="card-id">ID: RM-1123</span>
+          <span class="card-badge in-stock">IN STOCK</span>
+        </div>
+        <div class="card-name">Calcium Carbonate (CaCO₃)</div>
+        <div class="card-meta">Grade: Coated / Uncoated | Origin: Pakistan</div>
+        <div class="card-specs">
+          <div><div class="spec-label">Min Order</div><div class="spec-value">10 MT</div></div>
+          <div><div class="spec-label">Price/KG</div><div class="spec-value">Rs. 18.00</div></div>
+        </div>
+        <button class="btn-quote">REQUEST QUOTE →</button>
+      </div>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <p class="pagination-info">Showing 1–8 of 1,240 results</p>
+      <div class="pagination-buttons">
+        <button class="page-btn arrow">‹</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">...</button>
+        <button class="page-btn">155</button>
+        <button class="page-btn arrow">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">RAW<span>MAT</span></div>
+          <p>Pakistan's largest B2B marketplace for industrial raw materials.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Materials</h4>
+          <ul><li><a href="#">Polymers</a></li><li><a href="#">Metals</a></li><li><a href="#">Chemicals</a></li><li><a href="#">Textiles</a></li></ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Blog</a></li><li><a href="#">Contact</a></li></ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul><li><a href="#">Help Center</a></li><li><a href="#">Safety</a></li><li><a href="#">Terms</a></li><li><a href="#">Privacy</a></li></ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 RAWMAT. All rights reserved.</p>
+        <p>Built for Pakistani Industry 🇵🇰</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
